@@ -13,7 +13,8 @@ pipeline {
 	stages {
 		stage('Run helm'){
 			steps{
-				container('mongodb-pod') {
+				git url: 'https://github.com/sagarpatr/Nosql-mongodb-operator.git', branch: 'master', credentialsId: 'nosql-repository'
+				// container('mongodb-pod') {
 					echo "Check out mongodb-operator code testing again"
 					git url: 'https://github.com/sagarpatr/Nosql-mongodb-operator.git', branch: 'master', credentialsId: 'nosql-repository'
 					/*
