@@ -11,7 +11,7 @@ pipeline {
 		}
 	}
 	stages {
-		stage('Run helm')
+		stage('Run helm'){
 			steps{
 				container('mongodb-pod'){
 					echo "Check out mysql-operator code testing again"
@@ -24,5 +24,6 @@ pipeline {
 					sh '''
 				}	
 			}
+		}	
 	}
 }
