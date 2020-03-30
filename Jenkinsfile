@@ -1,6 +1,6 @@
 pipeline {
 	agent {
-		kubernets{
+		kubernetes{
 			label mongodb-pod
 			containerTemplate{
 				name mongodb-pod
