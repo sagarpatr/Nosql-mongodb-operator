@@ -17,7 +17,7 @@ pipeline {
                     echo "Check out mysql-operator code testing again in gke"
                     git url: 'https://github.com/sagarpatr/Nosql-mongodb-operator.git', branch: 'master', credentialsId: 'github-test'
                     sh '''
-                    PACKAGE=mysql-operator
+                    #PACKAGE=mysql-operator
 		
 		    kubectl get deploy,svc tiller-deploy -n kube-system
 		    echo "version helm"
