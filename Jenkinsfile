@@ -1,9 +1,9 @@
 pipeline {
   agent {
     kubernetes {
-      label 'mysql-pod'
+      label 'mongodb-pod'
       containerTemplate {
-        name 'mysql-pod'
+        name 'mongodb-pod'
         image 'dtzar/helm-kubectl'
         ttyEnabled true
         command 'cat'
@@ -13,9 +13,9 @@ pipeline {
   stages {
     stage('Run helm') {
       steps {
-        container('mysql-pod') {
+        container('mongodb-pod') {
                     echo "Check out mysql-operator code testing again in gke"
-                    git url: 'https://github.com/itsrivastava/mysql-operator.git', branch: 'master', credentialsId: 'github'
+                    git url: 'https://github.com/sagarpatr/Nosql-mongodb-operator.git', branch: 'master', credentialsId: 'github-test'
                     sh '''
                     PACKAGE=mysql-operator
 		
@@ -32,7 +32,7 @@ pipeline {
 		    # mv values-temp.yaml values.yaml
 		    # rm -f -r operator
                     # cd /home/jenkins/agent/workspace/mysql-operator/chart/mysql-operator
-		    cd /home/jenkins/agent/workspace/mysql-operator/chart
+		    #cd /home/jenkins/agent/workspace/mysql-operator/chart
                     # helm dependency update
                     # helm package .
                     helm list
@@ -41,12 +41,12 @@ pipeline {
                     # helm repo update
                                         
                     
-                    DEPLOYED=$(helm list |grep -E "mysql-operator15" |grep DEPLOYED |wc -l)
-                    if [ $DEPLOYED == 0 ] ; then
-                     helm install mysql-operator15 mysql-operator --namespace=pxc
-                    else
-                     helm upgrade mysql-operator15 mysql-operator --namespace=pxc
-                    fi
+                    #DEPLOYED=$(helm list |grep -E "mysql-operator15" |grep DEPLOYED |wc -l)
+                    #if [ $DEPLOYED == 0 ] ; then
+                    #helm install mysql-operator15 mysql-operator --namespace=pxc
+                    #else
+                    #helm upgrade mysql-operator15 mysql-operator --namespace=pxc
+                    #fi
                  
                     echo "deployed!"
                     '''
